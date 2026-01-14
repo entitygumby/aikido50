@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for the Aikido 50th Anniversary Seminar. Choose your package and secure your spot at this historic event.">
+    <meta name="keywords" content="Aikido registration, seminar registration, martial arts event, Aikido seminar signup">
+    <title>Registration | Aikido 50th Anniversary Seminar</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥋</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🥋</span>
+                <h1>Aikido 50</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Aikido</a></li>
+                    <li><a href="seminar.html">Seminar Info</a></li>
+                    <li><a href="registration.html" class="active">Register</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Register for the Seminar</h1>
+            <p>Secure your place at this historic 50th anniversary celebration</p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Registration Packages</h2>
+                <p>Choose the package that best suits your needs</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Single Day Pass</h3>
+                    <div class="pricing-amount">$150<span>/day</span></div>
+                    <ul class="pricing-features">
+                        <li>Access to all sessions for one day</li>
+                        <li>Lunch included</li>
+                        <li>Seminar materials</li>
+                        <li>Certificate of participation</li>
+                    </ul>
+                    <a href="#registration-form" class="btn btn-secondary">Select</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Full Seminar Pass</h3>
+                    <div class="pricing-amount">$350<span>/3 days</span></div>
+                    <ul class="pricing-features">
+                        <li>Access to all three days</li>
+                        <li>All meals included</li>
+                        <li>Welcome dinner on Friday</li>
+                        <li>Seminar materials & gift pack</li>
+                        <li>Certificate of participation</li>
+                        <li>Priority seating for demonstrations</li>
+                    </ul>
+                    <a href="#registration-form" class="btn btn-primary">Select</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Student Pass</h3>
+                    <div class="pricing-amount">$250<span>/3 days</span></div>
+                    <ul class="pricing-features">
+                        <li>Full seminar access (3 days)</li>
+                        <li>All meals included</li>
+                        <li>Seminar materials</li>
+                        <li>Certificate of participation</li>
+                        <li>Valid student ID required</li>
+                    </ul>
+                    <a href="#registration-form" class="btn btn-secondary">Select</a>
+                </div>
+            </div>
+            <div class="text-center mt-20">
+                <p style="color: var(--text-secondary);">Early bird discount: <strong style="color: var(--secondary-color);">15% off</strong> until February 1, 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="registration-form" class="registration-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Registration Form</h2>
+                <p>Fill out the form below to register for the seminar</p>
+            </div>
+            <form class="registration-form" id="registration-form">
+                <!-- Personal Information -->
+                <h3 style="color: var(--primary-color); margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">Personal Information</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name *</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name *</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="address">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+                            <option value="JP">Japan</option>
+                            <option value="US">United States</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="CA">Canada</option>
+                            <option value="AU">Australia</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="BR">Brazil</option>
+                            <option value="ES">Spain</option>
+                            <option value="IT">Italy</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Aikido Information -->
+                <h3 style="color: var(--primary-color); margin: 30px 0 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">Aikido Information</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rank">Current Rank *</label>
+                        <select id="rank" name="rank" required>
+                            <option value="">Select Rank</option>
+                            <option value="beginner">Beginner (No Rank)</option>
+                            <option value="6kyu">6th Kyu</option>
+                            <option value="5kyu">5th Kyu</option>
+                            <option value="4kyu">4th Kyu</option>
+                            <option value="3kyu">3rd Kyu</option>
+                            <option value="2kyu">2nd Kyu</option>
+                            <option value="1kyu">1st Kyu</option>
+                            <option value="shodan">Shodan (1st Dan)</option>
+                            <option value="nidan">Nidan (2nd Dan)</option>
+                            <option value="sandan">Sandan (3rd Dan)</option>
+                            <option value="yondan">Yondan (4th Dan)</option>
+                            <option value="godan+">Godan or higher</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Years of Practice *</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select Experience</option>
+                            <option value="0-1">Less than 1 year</option>
+                            <option value="1-3">1-3 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="5-10">5-10 years</option>
+                            <option value="10-20">10-20 years</option>
+                            <option value="20+">20+ years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dojo">Home Dojo/Organization</label>
+                        <input type="text" id="dojo" name="dojo" placeholder="e.g., Tokyo Aikikai">
+                    </div>
+                    <div class="form-group">
+                        <label for="instructor">Primary Instructor</label>
+                        <input type="text" id="instructor" name="instructor" placeholder="e.g., Sensei Yamamoto">
+                    </div>
+                </div>
+
+                <!-- Registration Details -->
+                <h3 style="color: var(--primary-color); margin: 30px 0 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">Registration Details</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="package">Registration Package *</label>
+                        <select id="package" name="package" required>
+                            <option value="">Select Package</option>
+                            <option value="single-friday">Single Day - Friday ($150)</option>
+                            <option value="single-saturday">Single Day - Saturday ($150)</option>
+                            <option value="single-sunday">Single Day - Sunday ($150)</option>
+                            <option value="full">Full Seminar Pass ($350)</option>
+                            <option value="student">Student Pass ($250)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tshirt">T-Shirt Size (Commemorative)</label>
+                        <select id="tshirt" name="tshirt">
+                            <option value="">Select Size</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Requirements</label>
+                    <select id="dietary" name="dietary">
+                        <option value="none">No special requirements</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="halal">Halal</option>
+                        <option value="kosher">Kosher</option>
+                        <option value="gluten-free">Gluten-free</option>
+                        <option value="other">Other (please specify below)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="medical">Medical Conditions/Allergies</label>
+                    <textarea id="medical" name="medical" placeholder="Please list any medical conditions, injuries, or allergies that instructors should be aware of..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-requests">Special Requests or Comments</label>
+                    <textarea id="special-requests" name="special-requests" placeholder="Any additional requests or information you'd like us to know..."></textarea>
+                </div>
+
+                <!-- Emergency Contact -->
+                <h3 style="color: var(--primary-color); margin: 30px 0 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">Emergency Contact</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="emergency-name">Contact Name *</label>
+                        <input type="text" id="emergency-name" name="emergency-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emergency-phone">Contact Phone *</label>
+                        <input type="tel" id="emergency-phone" name="emergency-phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="emergency-relation">Relationship</label>
+                    <input type="text" id="emergency-relation" name="emergency-relation" placeholder="e.g., Spouse, Parent, Friend">
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-group" style="margin-top: 30px;">
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#" style="color: var(--secondary-color); text-decoration: underline;">terms and conditions</a> and understand that Aikido practice involves physical contact and some risk of injury. I confirm that I am physically able to participate in the seminar activities. *</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">I would like to receive news and updates about future Aikido events and seminars.</label>
+                    </div>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-primary">Complete Registration</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Payment Information -->
+    <section class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Payment Information</h2>
+                <p>Secure payment options available</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Credit/Debit Card</h3>
+                    <p>Secure payment via Visa, MasterCard, American Express, or JCB. Payment processed immediately upon registration.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏦</div>
+                    <h3>Bank Transfer</h3>
+                    <p>Wire transfer option available for international participants. Registration confirmed upon receipt of payment.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h3>PayPal</h3>
+                    <p>Quick and secure payment through your PayPal account. Protection for both buyer and seller.</p>
+                </div>
+            </div>
+            <div class="text-center mt-20">
+                <p style="color: var(--text-secondary);">After submitting the form, you will be redirected to our secure payment portal to complete your registration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Notes -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Important Notes</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Cancellation Policy</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Full refund:</strong> Cancellations made 30+ days before the event.<br>
+                        <strong>50% refund:</strong> Cancellations made 15-30 days before the event.<br>
+                        <strong>No refund:</strong> Cancellations within 14 days of the event. However, you may transfer your registration to another participant.<br>
+                        All refund requests must be submitted in writing to info@aikido50seminar.com</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Confirmation Process</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Upon successful payment, you will receive a confirmation email within 24 hours containing your registration details, seminar schedule, and practical information. Please save this email and bring it with you to the seminar for check-in.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Student Discount Eligibility</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The student discount is available to full-time students with a valid student ID. You will be required to present your student ID at registration. If you cannot provide proof of student status, you will be asked to pay the difference for the full seminar pass.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Group Discounts</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Groups of 5 or more from the same dojo receive a 10% discount. Groups of 10 or more receive a 15% discount. Contact us directly at info@aikido50seminar.com to arrange group registration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Aikido 50th Anniversary</h4>
+                    <p>Celebrating half a century of Aikido practice and the preservation of O-Sensei's legacy.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Aikido</a></li>
+                        <li><a href="seminar.html">Seminar Info</a></li>
+                        <li><a href="registration.html">Register</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aikido Resources</h4>
+                    <ul>
+                        <li><a href="https://www.aikikai.or.jp/eng/" target="_blank" rel="noopener">Aikikai Foundation (Hombu Dojo)</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Aikido" target="_blank" rel="noopener">Aikido - Wikipedia</a></li>
+                        <li><a href="https://www.aikidojournal.com/" target="_blank" rel="noopener">Aikido Journal</a></li>
+                        <li><a href="https://www.usaikifed.com/" target="_blank" rel="noopener">United States Aikido Federation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>Email: info@aikido50seminar.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Location: Tokyo Convention Center</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aikido 50th Anniversary Seminar. All rights reserved.</p>
+                <p>Dedicated to the memory of O-Sensei Morihei Ueshiba</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
