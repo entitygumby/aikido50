@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aikido Australia - 50th Anniversary Seminar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Carousel Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide:nth-child(1) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('images/aikido-1.jpg');
+            background-color: #1a365d;
+        }
+
+        .carousel-slide:nth-child(2) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('images/aikido-2.jpg');
+            background-color: #2c5282;
+        }
+
+        .carousel-slide:nth-child(3) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('images/aikido-3.jpg');
+            background-color: #2b6cb0;
+        }
+
+        .carousel-slide:nth-child(4) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('images/aikido-4.jpg');
+            background-color: #3182ce;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: #fff;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            z-index: 5;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content .date {
+            font-size: 1.4rem;
+            font-weight: 400;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Event Info Section */
+        .event-info {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1a365d;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .info-card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            color: #1a365d;
+            margin-bottom: 15px;
+        }
+
+        .info-card p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            padding: 80px 20px;
+            background: #fff;
+        }
+
+        .schedule-accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .schedule-day {
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .schedule-day-header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: #fff;
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .schedule-day-header:hover {
+            background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+        }
+
+        .schedule-day-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .schedule-day-header .date-info {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .schedule-day-header .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .schedule-day.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .schedule-day-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #f8f9fa;
+        }
+
+        .schedule-day.expanded .schedule-day-content {
+            max-height: 1000px;
+        }
+
+        .schedule-item {
+            display: flex;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s ease;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-item:hover {
+            background: #edf2f7;
+        }
+
+        .schedule-time {
+            min-width: 120px;
+            font-weight: 600;
+            color: #2c5282;
+            font-size: 1rem;
+        }
+
+        .schedule-details h4 {
+            color: #1a365d;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .schedule-details p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a365d 0%, #0d1b2a 100%);
+            color: #fff;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 24px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .hero-content .date {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .schedule-day-header {
+                padding: 20px;
+            }
+
+            .schedule-day-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .schedule-item {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+
+            .schedule-time {
+                margin-bottom: 8px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section with Carousel -->
+    <section class="hero">
+        <div class="carousel">
+            <div class="carousel-slide active"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-slide"></div>
+        </div>
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-index="0"></div>
+            <div class="carousel-indicator" data-index="1"></div>
+            <div class="carousel-indicator" data-index="2"></div>
+            <div class="carousel-indicator" data-index="3"></div>
+        </div>
+        <div class="hero-content">
+            <p class="subtitle">Aikido Australia Takemusu Aiki Association</p>
+            <h1>50th Anniversary Seminar</h1>
+            <p class="date">Celebrating 50 Years of Aikido in Australia</p>
+        </div>
+    </section>
+
+    <!-- Event Information -->
+    <section class="event-info">
+        <div class="container">
+            <h2 class="section-title">Event Information</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-card-icon">&#128197;</div>
+                    <h3>Date</h3>
+                    <p>Saturday & Sunday<br>March 15-16, 2026</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">&#128205;</div>
+                    <h3>Location</h3>
+                    <p>Sydney Aikido Dojo<br>Sydney, Australia</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">&#127941;</div>
+                    <h3>Special Guests</h3>
+                    <p>International Instructors<br>& Founding Members</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">&#128101;</div>
+                    <h3>Open To</h3>
+                    <p>All Aikido Practitioners<br>All Levels Welcome</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seminar Schedule -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="section-title">Seminar Schedule</h2>
+            <div class="schedule-accordion">
+                <!-- Day 1 -->
+                <div class="schedule-day">
+                    <div class="schedule-day-header" onclick="toggleDay(this)">
+                        <div>
+                            <h3>Day 1</h3>
+                            <span class="date-info">Saturday, March 15, 2026</span>
+                        </div>
+                        <span class="toggle-icon">&#9660;</span>
+                    </div>
+                    <div class="schedule-day-content">
+                        <div class="schedule-item">
+                            <div class="schedule-time">8:00 AM</div>
+                            <div class="schedule-details">
+                                <h4>Registration & Welcome</h4>
+                                <p>Sign-in, receive materials, and morning tea</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">9:00 AM</div>
+                            <div class="schedule-details">
+                                <h4>Opening Ceremony</h4>
+                                <p>Welcome address and tribute to 50 years of Aikido in Australia</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">9:30 AM</div>
+                            <div class="schedule-details">
+                                <h4>Session 1: Fundamentals</h4>
+                                <p>Basic techniques and principles - All levels</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:00 AM</div>
+                            <div class="schedule-details">
+                                <h4>Morning Break</h4>
+                                <p>Refreshments provided</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:30 AM</div>
+                            <div class="schedule-details">
+                                <h4>Session 2: Weapons Training</h4>
+                                <p>Jo and Bokken practice</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">1:00 PM</div>
+                            <div class="schedule-details">
+                                <h4>Lunch Break</h4>
+                                <p>Lunch provided for all participants</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">2:30 PM</div>
+                            <div class="schedule-details">
+                                <h4>Session 3: Advanced Techniques</h4>
+                                <p>Dan grade focused session</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">4:00 PM</div>
+                            <div class="schedule-details">
+                                <h4>Afternoon Break</h4>
+                                <p>Refreshments provided</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">4:30 PM</div>
+                            <div class="schedule-details">
+                                <h4>Session 4: Free Practice</h4>
+                                <p>Open mat - Practice with visiting instructors</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">6:00 PM</div>
+                            <div class="schedule-details">
+                                <h4>Day 1 Closing</h4>
+                                <p>End of first day training</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">7:30 PM</div>
+                            <div class="schedule-details">
+                                <h4>Anniversary Dinner</h4>
+                                <p>Celebration dinner (separate registration required)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="schedule-day">
+                    <div class="schedule-day-header" onclick="toggleDay(this)">
+                        <div>
+                            <h3>Day 2</h3>
+                            <span class="date-info">Sunday, March 16, 2026</span>
+                        </div>
+                        <span class="toggle-icon">&#9660;</span>
+                    </div>
+                    <div class="schedule-day-content">
+                        <div class="schedule-item">
+                            <div class="schedule-time">8:30 AM</div>
+                            <div class="schedule-details">
+                                <h4>Morning Warm-up</h4>
+                                <p>Stretching and preparation</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">9:00 AM</div>
+                            <div class="schedule-details">
+                                <h4>Session 5: Takemusu Aiki</h4>
+                                <p>Traditional techniques and philosophy</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:30 AM</div>
+                            <div class="schedule-details">
+                                <h4>Morning Break</h4>
+                                <p>Refreshments provided</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:00 AM</div>
+                            <div class="schedule-details">
+                                <h4>Session 6: Multiple Attackers</h4>
+                                <p>Randori and multiple attack scenarios</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">12:30 PM</div>
+                            <div class="schedule-details">
+                                <h4>Lunch Break</h4>
+                                <p>Lunch provided for all participants</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">2:00 PM</div>
+                            <div class="schedule-details">
+                                <h4>Session 7: Special Guest Instructor</h4>
+                                <p>International guest instructor class</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">3:30 PM</div>
+                            <div class="schedule-details">
+                                <h4>Afternoon Break</h4>
+                                <p>Refreshments provided</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">4:00 PM</div>
+                            <div class="schedule-details">
+                                <h4>Session 8: Combined Practice</h4>
+                                <p>All levels training together</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">5:00 PM</div>
+                            <div class="schedule-details">
+                                <h4>Closing Ceremony</h4>
+                                <p>Acknowledgements, awards, and farewell</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">5:30 PM</div>
+                            <div class="schedule-details">
+                                <h4>Seminar Ends</h4>
+                                <p>Group photo and farewells</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Aikido Australia</div>
+            <p class="footer-tagline">Takemusu Aiki Association - Celebrating 50 Years</p>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/pages/Aikido-Australia-Takemusu-Aiki-Association/176519995697354" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+                <a href="https://www.instagram.com/aikidosydney/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                    Instagram
+                </a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aikido Australia Takemusu Aiki Association. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            currentSlide = index;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function startCarousel() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopCarousel() {
+            clearInterval(slideInterval);
+        }
+
+        // Click on indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                stopCarousel();
+                goToSlide(index);
+                startCarousel();
+            });
+        });
+
+        // Start the carousel
+        startCarousel();
+
+        // Schedule accordion functionality
+        function toggleDay(header) {
+            const dayElement = header.parentElement;
+            dayElement.classList.toggle('expanded');
+        }
+
+        // Expand Day 1 by default
+        document.querySelector('.schedule-day').classList.add('expanded');
+    </script>
+</body>
+</html>
