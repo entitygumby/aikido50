@@ -109,7 +109,8 @@ p { margin: 0; }
 .ph img.ok { opacity: 1; }
 .ph figcaption { position: relative; padding: 10px 12px; font-size: 13px; line-height: 1.45; display: grid; gap: 2px; }
 .ph figcaption .slot { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
-.ph:has(img.ok) figcaption { background: linear-gradient(transparent, rgba(0,0,0,.6)); color: #fff; }
+.ph:has(img.ok) figcaption { background: linear-gradient(transparent, rgba(0,0,0,.45) 35%, rgba(0,0,0,.75)); color: #fff; padding-top: 28px; }
+.ph img.portrait { object-position: 50% 30%; }
 .ph:has(img.ok) figcaption .slot { color: rgba(255,255,255,.75); }
 
 /* ---------- Map ---------- */
@@ -159,7 +160,9 @@ svg.map { display: block; width: 100%; height: 100%; background: var(--sea); }
 .sday .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
 .sday .meta .mono { color: var(--shu); font-size: 13px; letter-spacing: .06em; }
 .sday p { max-width: 64ch; }
-.sday .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 6px; }
+.sday .photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 6px; }
+.sday .photos.n3 { grid-template-columns: repeat(3, 1fr); }
+.sday .photos.n1 { grid-template-columns: 1fr; }
 
 /* ---------- B: Map + gallery ---------- */
 .mg-top { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; padding-block: 24px 40px; align-items: start; }
@@ -191,6 +194,7 @@ svg.map { display: block; width: 100%; height: 100%; background: var(--sea); }
 @media (max-width: 480px) {
   .wrap { padding-inline: 16px; }
   .mg-inset { width: 46%; }
+  .sday .photos, .sday .photos.n3 { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
@@ -212,7 +216,7 @@ svg.map { display: block; width: 100%; height: 100%; background: var(--sea); }
     <details class="notes" id="review-notes">
       <summary>Review notes: what's assumed and what still needs adding</summary>
       <ul>
-        <li><b>No photos yet.</b> Each striped frame is a labelled photo slot taken from the commentary (<span id="slot-count"></span> in total). Add a file to <span class="mono">images/japan-2012/</span> named after the slot ID (for example <span class="mono">d05-1.jpg</span>) and it fills that frame automatically.</li>
+        <li><b>Photos added (<span id="slot-count"></span>).</b> Picked from the trip folders, 2 to 4 per day. Captions describe what each photo shows; where the commentary mentions a moment with no matching photo (the O-Sensei statue, the minshuku at Chikatsuyu, Kiyomizudera) that caption was dropped. To swap a photo, replace <span class="mono">images/japan-2012/dNN-N.jpg</span>.</li>
         <li><b>Walk start point is assumed.</b> The commentary doesn't name where the walk began. A finish at Chikatsuyu after about six hours suggests the usual Takijiri-oji trailhead on the Nakahechi route, so the map starts the walk there. Please confirm.</li>
         <li><b>Map positions are approximate.</b> Places and routes are plotted to show the journey, not for navigation. Gomita Dojo is placed in central Tanabe because the commentary doesn't give an address.</li>
         <li><b>Day text is your commentary, unedited.</b> The summary at the top is new copy written from it.</li>
@@ -338,67 +342,67 @@ const DAYS = [
     short: 'Met at Kansai Airport, chartered bus to Musashi Ryokan, first bokken session on Shirahama beach and the welcome dinner.',
     text: ["We met at Kansai Airport at noon. Some of us were already in Osaka, while others came in by train from Tokyo or flew in from elsewhere. Once everyone had gathered, we boarded a chartered bus for Musashi Ryokan at Shirahama Hot Springs, our base for the first two nights.",
       "Check-in was smooth, and we headed straight to the beach with our bokken for our first training session. The sky was overcast, but spirits were high and it was a perfect warm-up for the trip. That night we had our welcome dinner in the ryokan's private dining hall. The food was amazing, and the drinking was a preview of the nights to come. Sensei really knew how to kick off a tour!"],
-    photos: [['Bokken training on Shirahama beach under an overcast sky'], ['Welcome dinner in the private dining hall at Musashi Ryokan']] },
+    photos: [["The group with the chartered bus from Kansai Airport"], ["Bokken training on Shirahama beach under an overcast sky"], ["Welcome dinner in the private dining hall at Musashi Ryokan"], ["Under the ryokan's welcome sign for Sydney Takemusu Aikikai"]] },
   { n: 2, date: 'Wed 11 Apr', title: "Shirahama, Tanabe and O-Sensei's Roots", view: 'tanabe', places: ['toretore', 'kozanji', 'gomita'], tags: ['train', 'culture'],
     short: "Beach weapons training, Toretore Ichiba market, respects at O-Sensei's grave at Kozanji, then a training exchange at Gomita Sensei's dojo in Tanabe.",
     text: ["We started the morning with weapons training on the beach again, wrapping up just before the rain arrived. We then wandered through Toretore Ichiba, Shirahama's lively market, and sampled the sights of the local wet market.",
       "Next we visited Kozanji, O-Sensei's final resting place, to pay our respects. O-Sensei was born in Wakayama, so the visit felt especially meaningful. The wet weather suited the sombre occasion, and the grounds were beautiful even in the rain.",
       "In the evening we had a friendly training exchange at the dojo of Gomita Sensei in Tanabe. Seiji Gomita Sensei was one of O-Sensei's direct students. He was there to receive us, but his son, Junichi Gomita, taught the first half of class, and Takayasu Sensei took the second. The dojo was magnificent: classic, full of atmosphere, and a very memorable place to train. We finished with a gift exchange and a group photo with our hosts. On the way back to the hotel, we stopped at the famous statue of O-Sensei in his finishing kokyu pose."],
-    photos: [["Kozanji, O-Sensei's resting place, in the rain"], ['Group photo with Gomita Sensei and hosts at the Tanabe dojo'], ["The statue of O-Sensei in his finishing kokyu pose"]] },
+    photos: [["Morning weapons training on the beach"], ["A spider crab in the tanks at Toretore Ichiba"], ["Kozanji, O-Sensei's resting place, in the rain"], ["Group photo with Gomita Sensei and hosts at the Tanabe dojo"]] },
   { n: 3, date: 'Thu 12 Apr', title: 'Kumano Kodo, Part 1', view: 'kodo', places: ['takijiri', 'chikatsuyu'], tags: ['walk'],
     short: 'First day on the trail: mountains, forest, rivers and villages to Chikatsuyu, with the cherry blossoms in full bloom. Onsen and an early night.',
     text: ["Today we began our walk on the Kumano Kodo. The walk to Kumano Hongu Taisha would take two days, and the bulk of our luggage was forwarded ahead to our next hotel, Yunominesou, so we only had to carry a small daypack with the essentials for the night.",
       "We set off around 9:30am on a long day through mountains, forest trails, rivers and small villages, stopping for lunch around 12:30pm. We reached Chikatsuyu at about 3:30pm. We had intended to fit in some jo training, but Sensei gave us a well-earned rest and praised the group for its relentless pace through the mountains. It was either that or that Sensei completely underestimated the terrain and I would be forever blamed for telling him that the walk was going to be easy and there would be vending machines along the way (it was actually my wife who said all that).",
       "The cherry blossoms were in full bloom along the way.",
       "Our accommodation sat beside the Hiki River and had its own onsen, Hisui no Yu, where we soaked our tired legs. After dinner we turned in early."],
-    photos: [['Cherry blossoms in full bloom along the Kumano Kodo'], ['The group on a forest section of the trail'], ['Minshuku beside the Hiki River, Chikatsuyu']] },
+    photos: [["Setting off: the group at the start of the trail"], ["The group on a forest section of the trail"], ["Crossing a log bridge"], ["Cherry blossoms in full bloom along the Kumano Kodo"]] },
   { n: 4, date: 'Fri 13 Apr', title: 'Kumano Kodo, Part 2', view: 'kodo', places: ['chikatsuyu', 'hongu'], tags: ['walk'],
     short: 'A 7am start after a group photo under the cherry tree, then trails, roads, temples and cemeteries to Kumano Hongu Taisha by 3:30pm.',
     text: ["Breakfast was at 6:20am to give us a head start. Before leaving, we took a group photo under the cherry blossom tree at the minshuku, and we set off at 7:00am.",
       "The second day offered more varied terrain: trails, mountains, villages and stretches of road, with the occasional temple and cemetery. We arrived at Kumano Hongu Taisha around 3:30pm, then were picked up by bus and taken to our lodgings at Yunominesou."],
-    photos: [['Group photo under the cherry blossom tree at the minshuku'], ['Arriving at Kumano Hongu Taisha']] },
+    photos: [["Group photo under the cherry blossom tree at the minshuku"], ["Walking through a village on the second day"], ["Old gravestones beside the trail"], ["Arriving at Kumano Hongu Taisha"]] },
   { n: 5, date: 'Sat 14 Apr', title: 'The Hongu Taisha Festival', view: 'hongu', places: ['hongu', 'kawayu'], tags: ['train', 'culture'],
     short: "Takayasu Sensei's kumitachi and jiyu-waza demonstration at the festival, then a seat at the main table for the gathering in honour of Doshu.",
     text: ["Light rain in the morning meant a slow start, and we rested before heading to Kumano Hongu Taisha around midday. Our arrival in the area was timed to coincide with the festival, where Aikikai performs an annual aikido demonstration at Hongu Taisha as a symbolic sacred offering to the deities.",
       "The weather cleared after midday, as if the gods were signalling it was time to perform. Aikikai Hombu kindly invited us to demonstrate and gave us a slot. Takayasu Sensei performed a series of kumitachi, along with empty-hand jiyu-waza.",
       "That evening we were invited to a special gathering in honour of Doshu Moriteru Ueshiba at Kawayu Midoriya. It was a great honour, especially as visitors from Australia, and a recognition of Takayasu Sensei's contribution to Aikido to be one of the guests sitting at the main table. The food was wonderful and the group had a great time. Most of us weren't fluent in Japanese, but we still managed to socialise with some of the guests and take some memorable photos."],
-    photos: [['Takayasu Sensei demonstrating kumitachi at Hongu Taisha'], ['Empty-hand jiyu-waza at the festival demonstration'], ['The gathering in honour of Doshu at Kawayu Midoriya']] },
+    photos: [["Takayasu Sensei demonstrating kumitachi at Hongu Taisha"], ["After the demonstration at Hongu Taisha"], ["The gathering in honour of Doshu at Kawayu Midoriya"], ["A group photo at the gathering"]] },
   { n: 6, date: 'Sun 15 Apr', title: 'Nara and Kyoto', view: 'south', places: ['nara', 'butokuden'], tags: ['train', 'culture', 'travel'],
     short: "Todaiji and the deer of Nara Park, then a short Iwama-style seminar and joint training with the Aishinkan at the Kyoto Butokuden.",
     text: ["We bid farewell to Wakayama Prefecture and made our way toward Kyoto, stopping first in Nara. We visited Todaiji, home to one of the largest Buddha statues in Japan. We also stopped at Nara Park, where the free-roaming deer, considered sacred messengers of the gods, wandered among us demanding snacks.",
       "On arriving in Kyoto, we checked into the Dormy Inn and hurried out to meet another group we'd be training with: the Aishinkan, led by Tanimoto Sensei, at the Kyoto Butokuden. Takayasu Sensei gave a short seminar showcasing Iwama-style aikido, followed by friendly joint training. The Butokuden is another legendary location, and it was a privilege to train there. We finished with a quick group dinner with Ogawa Sensei, one of Tanimoto Sensei's students, whom we would meet again in 2024."],
-    photos: [['Todaiji'], ['The deer of Nara Park demanding snacks'], ['Joint training with the Aishinkan at the Kyoto Butokuden']] },
+    photos: [["The Daibutsuden at Todaiji"], ["The deer of Nara Park demanding snacks"], ["Joint training with the Aishinkan at the Kyoto Butokuden"], ["Group photo at the Kyoto Butokuden"]] },
   { n: 7, date: 'Mon 16 Apr', title: 'Kyoto Sightseeing and Rest', view: 'kyoto', places: ['kiyomizu', 'kinkaku'], tags: ['rest', 'culture'],
     short: 'A rest day at Kiyomizudera and Kinkakuji, then separate dinners around the city.',
     text: ["A rest day, spent sightseeing at Kyoto's most famous sights, including Kiyomizudera and Kinkakuji. In the evening the group split up for separate dinners and wanders around the city."],
-    photos: [['Kiyomizudera'], ['Kinkakuji']] },
+    photos: [["Kinkakuji"], ["At Kinkakuji"], ["Kyoto's lantern-lit lanes at night"]] },
   { n: 8, date: 'Tue 17 Apr', title: 'Mount Kurama', view: 'kurama', places: ['kurama', 'gion'], tags: ['culture'],
     short: "Up Mount Kurama, where O-Sensei once had a small dojo and the Tengu King trained Yoshitsune, then dinner in Gion with Higuchi Sensei.",
     text: ["Sensei took the group up Mount Kurama, a spiritual place for martial artists where O-Sensei once had a small dojo. It's also famous for the folklore in which the King of the Tengu trained the young warrior Minamoto no Yoshitsune, a story Takayasu Sensei is particularly fond of.",
       "We took the local train and made a short hike up to the shrine, where we spent the day. In the evening we returned to Gion for dinner with Higuchi Sensei, one of Takayasu Sensei's contacts in Kyoto."],
-    photos: [['The shrine on Mount Kurama'], ['Dinner in Gion with Higuchi Sensei']] },
+    photos: [["Meeting the tengu at Kurama Station"], ["The shrine on Mount Kurama"], ["The young Yoshitsune and the Tengu King, in a 19th-century woodblock print"], ["Dinner in Gion with Higuchi Sensei"]] },
   { n: 9, date: 'Wed 18 Apr', title: 'Shinkansen to Tokyo', view: 'tokaido', places: ['kyoto', 'tokyo'], tags: ['travel'],
     short: 'Shinkansen to Tokyo, lunch near Tokyo Station, check-in at Grand Arc Hanzomon and a free afternoon.',
     text: ["We bid farewell to the Kansai region and took the Shinkansen to Tokyo, arriving around midday. After a quick lunch near Tokyo Station, we checked into our hotel, Grand Arc Hanzomon. The rest of the day was free, and everyone wandered Tokyo in their own way."],
-    photos: [['On the Shinkansen to Tokyo']] },
+    photos: [["Catching the Shinkansen to Tokyo"], ["Out in Tokyo on the free evening"]] },
   { n: 10, date: 'Thu 19 Apr', title: 'Hombu Dojo', view: 'tokyo', places: ['hombu', 'meiji', 'asakusa'], tags: ['train'],
     short: "Doshu's 6am class at Aikikai Hombu, where Sensei received his 7th dan certificate. Sightseeing, then back to Hombu for the 6pm class.",
     text: ["We left the hotel at 5:30am for the 6:00am class at Aikikai Hombu, specifically Doshu's morning class. It was our second encounter with Doshu on the trip, and he welcomed us warmly. For many of us, myself included, it was our first time training at Hombu.",
       "After class, Sensei was quietly called aside and escorted by Peter Bolt. When he returned some time later, he was holding his 7th dan certificate from Doshu. Sensei explained that for high dan grades, Doshu likes to present the certificate in front of O-Sensei's private shrine.",
       "After a quick breakfast, groups headed off to explore Tokyo (Meiji Jingu, Harajuku, Asakusa) before we returned to Aikikai for more training at 6pm."],
-    photos: [["Doshu's morning class at Aikikai Hombu"], ['Takayasu Sensei with his 7th dan certificate']] },
+    photos: [["Training at Aikikai Hombu Dojo"], ["The group outside Aikikai Hombu Dojo"]] },
   { n: 11, date: 'Fri 20 Apr', title: 'Iwama', view: 'joban', places: ['atago', 'aikijinja'], tags: ['train', 'culture'],
     short: 'A pilgrimage to Iwama: the climb up Atagosan with Hirosawa Sensei, the Aiki Shrine, and two sessions at the Iwama Dojo before the last train home.',
     text: ["This was a long day, a pilgrimage to Iwama to pay homage to one of the origins of aikido. After a 7am breakfast, we took the local train and arrived a little after 11am.",
       "Our first stop was Atagosan, a mountain of great significance to O-Sensei and Saito Sensei. At its summit stands Atago Jinja, where O-Sensei regularly climbed to perform demonstrations and prayers. Saito Sensei continued the tradition, leading his students up as part of their training, and Takayasu Sensei followed suit with us.",
       "Hirosawa Sensei met us at the top, gave us a short tour and led an impromptu aikido lesson. We then headed down (he drove, we walked) for a late lunch at a local izakaya.",
       "Around 4pm we reached the Aiki Shrine, where Sensei gave some commentary and we spent time at the shrine and O-Sensei's statue. That evening we trained in two sessions at the Iwama Dojo, led by Inagaki Shihan and Kubota Sensei. We caught the last train out around 9pm, arriving back in Tokyo after 11pm, but not before taking some memorable photos at the dojo."],
-    photos: [['Atago Jinja at the summit of Atagosan, with Hirosawa Sensei'], ['The Aiki Shrine and O-Sensei\'s statue'], ['Group photo at the Iwama Dojo']] },
+    photos: [["Atago Jinja at the summit of Atagosan"], ["Hirosawa Sensei's impromptu lesson at the summit"], ["The Aiki Shrine and O-Sensei's statue"], ["Group photo at the Iwama Dojo"]] },
   { n: 12, date: 'Sat 21 Apr', title: 'The Day Before Last', view: 'tokyo', places: ['shibuya'], tags: ['rest'],
     short: "Observing Hirosawa Sensei's private seminar, then the farewell dinner at Gonpachi Shibuya.",
     text: ["After the late night, this was largely a rest day. Takayasu Sensei was invited to a small private seminar by Hirosawa Sensei in Tokyo that afternoon. We didn't train, but were permitted to observe as guests.",
       "The one scheduled group event was the farewell dinner at 6:30pm, which Sensei organised at Gonpachi Shibuya with an all-you-can-drink package. As the drinks began arriving more and more slowly, most of us started ordering doubles! Sensei thanked everyone for coming and said he hoped we'd all enjoyed ourselves."],
-    photos: [['Farewell dinner at Gonpachi Shibuya']] },
+    photos: [["Hirosawa Sensei's private seminar in Tokyo"], ["Farewell dinner at Gonpachi Shibuya"]] },
   { n: 13, date: 'Sun 22 Apr', title: 'Goodbye', view: 'all', places: [], tags: ['travel'],
     short: 'Breakfast and goodbyes. Some flew out that morning, others stayed on in Tokyo.',
     text: ["On the official last day, we had breakfast at the hotel and said our goodbyes. Some flew out that morning, while others stayed on in Tokyo a little longer. It was an unforgettable trip, with memories that will last a lifetime."],
@@ -430,7 +434,7 @@ function photo(p, cls = '') {
 }
 function loadPhotos(root) {
   root.querySelectorAll('img[data-src]').forEach(img => {
-    img.addEventListener('load', () => img.classList.add('ok'), { once: true });
+    img.addEventListener('load', () => img.classList.add('ok', ...(img.naturalHeight > img.naturalWidth ? ['portrait'] : [])), { once: true });
     img.addEventListener('error', () => img.remove(), { once: true });
     img.src = img.dataset.src; img.removeAttribute('data-src');
   });
@@ -528,7 +532,7 @@ function buildStory() {
     </div>` + DAYS.map(d => `<article class="sday" id="s-day-${d.n}" data-day="${d.n}">
       <div class="dayhead"><div class="meta"><span class="mono">DAY ${String(d.n).padStart(2, '0')} · ${esc(d.date.toUpperCase())}</span></div><h2>${esc(d.title)}</h2></div>
       ${paras(d.text)}
-      ${d.photos.length ? `<div class="photos">${d.photos.map(p => photo(p)).join('')}</div>` : ''}
+      ${d.photos.length ? `<div class="photos n${d.photos.length}">${d.photos.map(p => photo(p)).join('')}</div>` : ''}
     </article>`).join('');
   storySvg = mount(document.getElementById('story-frame'), { view: 'all', day: 0 });
   setStoryDay(0, true);
@@ -629,7 +633,7 @@ document.querySelectorAll('.switch button').forEach(b => b.addEventListener('cli
   try { history.replaceState(null, '', '#' + b.dataset.opt); } catch (e) {}
   window.scrollTo({ top: 0 });
 }));
-document.getElementById('slot-count').textContent = DAYS.reduce((a, d) => a + d.photos.length, 0) + ' slots';
+document.getElementById('slot-count').textContent = DAYS.reduce((a, d) => a + d.photos.length, 0) + ' photos';
 let start = location.hash.slice(1);
 if (!builders[start]) { try { start = localStorage.getItem('kumano-layout') || 'story'; } catch (e) { start = 'story'; } }
 show(start);
